@@ -1,0 +1,24 @@
+<%= simple_form_for(@consumption) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+
+    <%= f.label :apartment_id, "apartment number" %>
+    <%= f.text_field :apartment_id %>
+    <%= f.label :inireading, "enter in reading" %>
+    <%= f.number_field :inireading %>
+    <%= f.label :lastreading, "enter currentreading" %>
+    <%= f.number_field :lastreading %>
+    <%= f.label :paid, "payment status" %>
+    <%= f.text_field :paid %>
+
+
+
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

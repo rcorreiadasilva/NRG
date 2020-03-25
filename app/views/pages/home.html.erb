@@ -1,2 +1,16 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+
+  <h1>Home</h1>
+  <% if user_signed_in? %>
+  <ul>
+    <li><%= link_to 'Go to Apartments', apartments_path %> or  Create <%= link_to 'New Apartment', new_apartment_path %></li>
+    <li> <%= link_to 'Go to Consumptions', consumptions_path %> or Add <%= link_to 'New Consumption', new_consumption_path %> </li>
+
+  </ul>
+
+<% else %>
+<h1>please log in</h1>
+<% end %>
+
+
+</div>
