@@ -14,7 +14,7 @@
     <% @consumptions.each do |consumption| %>
       <tr>
         <td><%= link_to 'Show', consumption %></td>
-        <td><%= link_to 'Edit', edit_consumption_path(consumption) %></td>
+        <td><%= link_to 'Edit', edit_apartment_consumption_path(consumption) %></td>
 <!--         <td><%#= link_to 'Destroy', consumption, method: :delete, data: { confirm: 'Are you sure?' } %></td>
  -->      </tr>
     <% end %>
@@ -23,7 +23,7 @@
 
 <br>
 <%= link_to 'Home', root_path %>
-<%= link_to 'New Consumption', new_consumption_path %>
+<%= link_to 'New Consumption', new_apartment_consumption_path %>
 
 
 </div>
