@@ -25,6 +25,7 @@ class ApartmentsController < ApplicationController
   # POST /apartments.json
   def create
     @apartment = Apartment.new(apartment_params)
+    @apartment.user = current_user
 
     respond_to do |format|
       if @apartment.save
@@ -40,6 +41,7 @@ class ApartmentsController < ApplicationController
   # PATCH/PUT /apartments/1
   # PATCH/PUT /apartments/1.json
   def update
+    @apartment.user = current_user
     respond_to do |format|
       if @apartment.update(apartment_params)
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
@@ -70,6 +72,6 @@ class ApartmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def apartment_params
       params.fetch(:apartment, {})
-      params.require(:apartment).permit(:building, :floor, :door, :user_id)
+      params.require(:apartment).permit(:building, :floor, :door)
     end
 end
