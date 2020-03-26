@@ -15,6 +15,9 @@ class ConsumptionsController < ApplicationController
   # GET /consumptions/new
   def new
     @consumption = Consumption.new
+    @apartment = apartment.find(params[:apartment_id])
+    @consumption.apartment = @apartment
+    @apartment.user = current_user
   end
 
   # GET /consumptions/1/edit
@@ -25,6 +28,10 @@ class ConsumptionsController < ApplicationController
   # POST /consumptions.json
   def create
     @consumption = Consumption.new(consumption_params)
+
+    @apartment = apartment.find(params[:apartment_id])
+    @consumption.apartment = @apartment
+    @apartment.user = current_user
 
     respond_to do |format|
       if @consumption.save

@@ -1,17 +1,23 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
+  <div class="row">
+    <p id="notice"><%= notice %></p>
+  </div>
 
+  <div class="row">
 
-
-  <ul>
-    <li>This apartment is located at: <%= @apartment.building %></li>
-    <li>on the <%= @apartment.floor %> floor and door <%= @apartment.door %> </li>
-    <p>tenant : <%= @apartment.user_id %> </p>
-  </ul>
-
-
-  <%= link_to 'Edit', edit_apartment_path(@apartment) %> |
-  <%= link_to 'Back', apartments_path %>
+    <div class="card-product">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <div class="card-product-infos">
+        <h2> Apartment at: <%= @apartment.building %></h2>
+        <p> <%= @apartment.floor %> floor - door <%= @apartment.door %> .</p>
+        <p>created by : <%= @apartment.user.email %> </p>
+        |<%= link_to 'Edit', edit_apartment_path(@apartment) %>|
+        <%#= link_to 'Back', apartments_path %>
+      </div>
+    </div>
+  </div>
+  <%#= link_to 'Edit', edit_apartment_path(@apartment) %>
+  |<%= link_to 'Back', apartments_path %>|
 
 
 </div>
