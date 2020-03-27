@@ -1,4 +1,4 @@
 class Apartment < ApplicationRecord
   belongs_to :user
-  has_many :consumptions
+  has_many :consumptions, dependent: :destroy
 end

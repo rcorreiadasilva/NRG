@@ -25,20 +25,36 @@ class ConsumptionsController < ApplicationController
 
   # POST /consumptions
   # POST /consumptions.json
-  def create
-    @consumption = Consumption.new(consumption_params)
 
-    @apartment = apartment.find(params[:apartment_id])
+  # def create
+  #   @cocktail = Cocktail.find(params[:cocktail_id])
+  #   @review = Review.new(review_params)
+  #   @review.cocktail = @cocktail
+  #   if @review.save
+  #     redirect_to cocktail_path(@cocktail)
+  #   else
+  #     @dose = Dose.new
+  #     render "cocktails/show"
+  #   end
+  # end
+
+
+
+  def create
+    @apartment = Apartment.find(params[:apartment_id])
+    @consumption = Consumption.new(consumption_params)
     @consumption.apartment = @apartment
-    @apartment.user = current_user
+    # @apartment.user = current_user
 
     respond_to do |format|
       if @consumption.save
-        format.html { redirect_to @consumption, notice: 'Consumption was successfully created.' }
-        format.json { render :show, status: :created, location: @consumption }
+        # format.html { redirect_to @consumption, notice: 'Consumption was successfully created.' }
+        # format.json { render :show, status: :created, location: @consumption }
+        redirect_to apartment_path(@apartment)
       else
-        format.html { render :new }
-        format.json { render json: @consumption.errors, status: :unprocessable_entity }
+        render "apartments/show"
+        # format.html { render :new }
+        # format.json { render json: @consumption.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -48,11 +64,13 @@ class ConsumptionsController < ApplicationController
   def update
     respond_to do |format|
       if @consumption.update(consumption_params)
-        format.html { redirect_to @consumption, notice: 'Consumption was successfully updated.' }
-        format.json { render :show, status: :ok, location: @consumption }
+        redirect_to apartment_path(@apartment)
+        # format.html { redirect_to @consumption, notice: 'Consumption was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @consumption }
       else
-        format.html { render :edit }
-        format.json { render json: @consumption.errors, status: :unprocessable_entity }
+        render "apartments/show"
+        # format.html { render :edit }
+        # format.json { render json: @consumption.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,7 +94,7 @@ class ConsumptionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def consumption_params
       params.fetch(:consumption, {})
-      params.require(:consumption).permit(:inireading, :lastreading, :paid, :apartment_id )
+      params.require(:consumption).permit(:inireading, :lastreading, :paid )
     end
 
 end

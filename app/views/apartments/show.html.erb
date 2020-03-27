@@ -4,106 +4,81 @@
   </div>
 <!-- APARTMENT INFO -->
   <div class="row">
-    <h1><%= @apartment.building %> Apartment <%= @apartment.floor %> <%= @apartment.door %> </h1>
+    <h1 class="text-center "><%= @apartment.building %> Apartment <%= @apartment.floor %> <%= @apartment.door %> </h1>
   </div>
 <!-- -------------------------------- -->
 
 <!-- TENANT INFO -->
-  <div class="row">
-    <h2>TENANT</h2>
-  </div>
+  <div class="row mb-3 mt-3">
+    <div class="col">
+      <h2>TENANT</h2>
+    </div>
+    <div class="col-2">
+      <%= link_to 'Edit', edit_apartment_path(@apartment) %>|
+      <%= link_to 'Back', apartments_path %>
+    </div>
 
-  <div class="row">
-    <div class="col-4">
-      <h4>Name</h4>
-    </div>
-    <div class="col-4">
-      <h4>Phone</h4>
-    </div>
-    <div class="col-4">
-      <h4>email</h4>
-    </div>
   </div>
-
-  <div class="row">
-    <div class="col-4">
-      <p>Jon Doe</p>
-    </div>
-    <div class="col-4">
-      <p>999 999 999</p>
-    </div>
-    <div class="col-4">
-      <p>jon@doe.com</p>
-    </div>
-  </div>
-<!-- ------------------------------------------ -->
 <div class="row">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Jon Doe</td>
+      <td>999 999 999/td>
+      <td>jon@doe.com</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+<!-- ------------------------------------------ -->
+<div class="row mb-3 mt-3">
   <h2>ELECTRICITY</h2>
 </div>
-<div class="row">
+<div class="row mb-3">
   <h3>Consumptions</h3>
 </div>
-<div class="row">
-  <div class="col-2">
-    <h4>Initial Date</h4>
-  </div>
-  <div class="col-2">
-    <h4>Reading</h4>
-  </div>
-  <div class="col-2">
-    <h4>Final Date</h4>
-  </div>
-  <div class="col-2">
-    <h4>Reading</h4>
-  </div>
-  <div class="col-2">
-    <h4>Consumption</h4>
-  </div>
-  <div class="col-2">
-    <h4>Payment</h4>
-  </div>
-</div>
 
 <div class="row">
-  <div class="col-2">
-    <p>Initial Date - code</p>
-  </div>
-  <div class="col-2">
-    <p>Reading - code</p>
-  </div>
-  <div class="col-2">
-    <p>Final Date- code</p>
-  </div>
-  <div class="col-2">
-    <p>Reading- code</p>
-  </div>
-  <div class="col-2">
-    <p>Consumption- code</p>
-  </div>
-  <div class="col-2">
-    <p>Payment- code</p>
-  </div>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Initial Date</th>
+      <th scope="col">Reading</th>
+      <th scope="col">Final Date</th>
+      <th scope="col">Reading</th>
+      <th scope="col">Consumption</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @apartment.consumptions.each do |consumption| %>
+      <td>Initial Date - code</td>
+      <td><%= consumption.inireading %></td>
+      <td>Final Date- code</td>
+      <td><%= consumption.lastreading %></td>
+      <td><%= consumption.lastreading - consumption.inireading %> </td>
+      <td><%= consumption.paid %></td>
+      <% end %>
+    </tr>
+  </tbody>
+  </table>
 </div>
 
 
 
 
-<!--
------------------------------------------------------------------------------
-    <div class="card-product">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-        <h2> Apartment at: <%= @apartment.building %></h2>
-        <p> <%= @apartment.floor %> floor - door <%= @apartment.door %> .</p>
-        <p>created by : <%= @apartment.user.email %> </p>
-        |<%#= link_to 'Edit', edit_apartment_path(@apartment) %>|
-        <%#= link_to 'Back', apartments_path %>
-      </div>
-    </div>
 
 
-------------------------------------------------------------------------------- -->
-<%= link_to 'Edit', edit_apartment_path(@apartment) %>
-|<%= link_to 'Back', apartments_path %>|
+
 </div>
+
 
