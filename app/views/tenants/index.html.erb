@@ -1,0 +1,29 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<h1>Tenants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tenants.each do |tenant| %>
+      <tr>
+        <td><%#= link_to 'Show', apartment_tenant_path(tenant) %></td>
+        <td><%#= link_to 'Edit', edit_apartment_tenant_path(tenant) %></td>
+<!--         <td><%#= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ -->      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Home', root_path %>
+<%= link_to 'New tenant', new_tenant_path %>
+
+
+</div>

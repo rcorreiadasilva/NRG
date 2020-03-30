@@ -69,7 +69,7 @@ class ConsumptionsController < ApplicationController
         # format.html { redirect_to @consumption, notice: 'Consumption was successfully updated.' }
         # format.json { render :show, status: :ok, location: @consumption }
       else
-        render "apartments/show"
+        render :edit
         # format.html { render :edit }
         # format.json { render json: @consumption.errors, status: :unprocessable_entity }
       end
@@ -95,7 +95,7 @@ class ConsumptionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def consumption_params
       params.fetch(:consumption, {})
-      params.require(:consumption).permit(:inireading, :lastreading, :paid )
+      params.require(:consumption).permit(:inireading, :lastreading, :paid, :start, :end )
     end
 
 end

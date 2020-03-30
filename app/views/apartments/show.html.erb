@@ -4,7 +4,7 @@
   </div>
 <!-- APARTMENT INFO -->
   <div class="row">
-    <h1 class="text-center "><%= @apartment.building %> Apartment <%= @apartment.floor %> <%= @apartment.door %> </h1>
+    <h1 class="text-center "><%= @apartment.building.capitalize %> -  APARTMENT <%= @apartment.floor %> <%= @apartment.door.capitalize %> </h1>
   </div>
 <!-- -------------------------------- -->
 
@@ -35,7 +35,7 @@
   <tbody>
     <tr>
       <td>Jon Doe</td>
-      <td>999 999 999/td>
+      <td>999 999 999</td>
       <td>jon@doe.com</td>
     </tr>
   </tbody>
@@ -70,9 +70,9 @@
         <tbody>
           <% @apartment.consumptions.each do |consumption| %>
            <tr>
-            <td>Initial Date - code</td>
+            <td><%= consumption.start %></td>
             <td><%= consumption.inireading %></td>
-            <td>Final Date- code</td>
+            <td><%= consumption.end %></td>
             <td><%= consumption.lastreading %></td>
             <td><%= consumption.lastreading - consumption.inireading %> </td>
             <td><%= consumption.paid %></td>
