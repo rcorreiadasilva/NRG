@@ -12,11 +12,15 @@
 
   <tbody>
     <% @tenants.each do |tenant| %>
-      <tr>
-        <td><%#= link_to 'Show', apartment_tenant_path(tenant) %></td>
-        <td><%#= link_to 'Edit', edit_apartment_tenant_path(tenant) %></td>
-<!--         <td><%#= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
- -->      </tr>
+      <div class="card-product mb-3">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
+      <div class="card-product-infos">
+        <h2 class="text-reset"><%= link_to tenant.first_name , tenant %></h2>
+        <!-- <p> Resident on <%= apartment.floor %> floor - door <%= apartment.door %>.</p> -->
+       <%= link_to 'Show', tenant %> |
+       <%= link_to 'Edit',  edit_tenant_path(tenant) %>
+      </div>
+    </div>
     <% end %>
   </tbody>
 </table>

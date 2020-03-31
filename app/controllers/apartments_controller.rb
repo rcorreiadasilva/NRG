@@ -68,6 +68,7 @@ class ApartmentsController < ApplicationController
     def set_apartment
       @apartment = Apartment.find(params[:id])
       @consumption = Consumption.new
+      @tenant = Tenant.new
 
     end
 

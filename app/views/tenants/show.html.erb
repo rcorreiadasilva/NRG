@@ -1,4 +1,4 @@
-div class="container">
+<div class="container">
   <p id="notice"><%= notice %></p>
 
   <p> Tenant </p>
@@ -6,12 +6,12 @@ div class="container">
   <ul>
     <li>Name: <%= @tenant.first_name %> <%= @tenant.last_name %> </li>
     <li>Contact: <%= @tenant.phone %></li>
-    <li>Total consumed: <%= @tenant.email  %> </li>
+    <li>Email: <%= @tenant.email  %> </li>
   </ul>
 
 
 
-  <%#= link_to 'Edit', edit_apartment_consumption_path(@consumption) %> |
+  <%= link_to 'Edit', edit_tenant_path(@tenant) %> |
 
 
 

@@ -68,7 +68,6 @@ class TenantsController < ApplicationController
     def set_tenant
       @tenant = Tenant.find(params[:id])
 
-
     end
 
     # Only allow a list of trusted parameters through.
