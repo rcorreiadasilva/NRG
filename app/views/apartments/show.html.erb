@@ -24,32 +24,32 @@
         <i class="fas fa-arrow-left text-primary text-decoration-none"data-toggle="tooltip" data-placement="top" title="back"></i>
       <% end %>
     </div>
-
   </div>
-<div class="row table-responsive">
-  <table class="table text-center ">
-  <thead class="table-primary">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Email</th>
-    </tr>
-  </thead>
-  <% if @tenant %>
-  <tbody>
-    <tr>
-      <td><%= @tenant.first_name %> <%= @tenant.last_name %></td>
-      <td><%= @tenant.phone %></td>
-      <td><%= @tenant.email %></td>
-    </tr>
-  </tbody>
 
-  </table>
-</div>
-<% else %>
-<%= render 'add_tenant', tenant: @tenant %>
-<% end %>
+  <div class="row table-responsive">
+    <table class="table text-center ">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <%# if @tenant %>
+    <tbody>
+      <tr>
+        <td><%= @tenant.first_name %> <%= @tenant.last_name %></td>
+        <td><%= @tenant.phone %></td>
+        <td><%= @tenant.email %></td>
+      </tr>
+    </tbody>
 
+    </table>
+
+    <%# else %>
+  <%#= render 'add_tenant', tenant: @tenant %>
+    <%# end %>
+  </div>
 <!-- ------------------------------------------ -->
   <div class="row mb-3 mt-3">
     <h2>ELECTRICITY</h2>
@@ -57,11 +57,11 @@
   <div class="row mb-2">
     <h3>Consumptions</h3>
   </div>
-   <div class="class mb-2">
-     <%= link_to new_apartment_consumption_path(@apartment) do %>
+  <div class="class mb-2">
+    <%= link_to new_apartment_consumption_path(@apartment) do %>
       <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
-     <% end %>
-   </div>
+    <% end %>
+  </div>
   <div class="row">
     <div class="table-responsive">
       <table class="table text-center table-sm table-hover">
@@ -83,7 +83,11 @@
             <td><%= consumption.end %></td>
             <td><%= consumption.lastreading %></td>
             <td><%= consumption.lastreading - consumption.inireading %> </td>
-            <td><%= consumption.paid %></td>
+            <!-- <td><%#= consumption.paid %></td> -->
+            <%= simple_form_for [@apartment, @consumption] do |f| %>
+            <td>
+              <%= f.input :paid %></td>
+              <% end %>
           <% end %>
           </tr>
         </tbody>

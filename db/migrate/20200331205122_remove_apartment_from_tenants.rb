@@ -1,5 +1,5 @@
 class RemoveApartmentFromTenants < ActiveRecord::Migration[5.2]
   def change
-    :tenants, :apartment
+   remove_column :tenants, :apartment
   end
 end

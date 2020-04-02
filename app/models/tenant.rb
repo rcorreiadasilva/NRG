@@ -1,3 +1,4 @@
 class Tenant < ApplicationRecord
-  #belongs_to :apartment
+  belongs_to :user
+  has_many :consumptions, dependent: :destroy
 end
