@@ -10,6 +10,7 @@ class ApartmentsController < ApplicationController
   # GET /apartments/1
   # GET /apartments/1.json
   def show
+
   end
 
   # GET /apartments/new
@@ -69,6 +70,7 @@ class ApartmentsController < ApplicationController
       @apartment = Apartment.find(params[:id])
       @consumption = Consumption.new
       @tenant = Tenant.new
+
 
     end
 

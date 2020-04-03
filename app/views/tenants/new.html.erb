@@ -1,10 +1,11 @@
 <div class="container">
-  <h1>Create new Tenant</h1>
+  <h1>Create new Tenant  for APARTMENT <%= @apartment.floor %> <%= @apartment.door.capitalize %></h1>
 
 
 
   <%= render 'form', tenant: @tenant %>
+  <%= link_to 'Back', apartment_path(@apartment) %>
 
-  <%= link_to 'Back', tenants_path %>
+  <%#= link_to 'Back', tenants_path %>
 </div>
 

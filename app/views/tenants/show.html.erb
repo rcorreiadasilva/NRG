@@ -7,12 +7,13 @@
     <li>Name: <%= @tenant.first_name %> <%= @tenant.last_name %> </li>
     <li>Contact: <%= @tenant.phone %></li>
     <li>Email: <%= @tenant.email  %> </li>
+    <li>apartment <%= @tenant.apartment %></li>
   </ul>
 
 
 
-  <%= link_to 'Edit', edit_tenant_path(@tenant) %> |
-
+  <%#= link_to 'Edit', edit_tenant_path(@tenant) %> |
+  <%= link_to 'go_to_apartment', apartment_path(@apartment) %>
 
 
 

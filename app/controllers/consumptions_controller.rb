@@ -45,19 +45,21 @@ class ConsumptionsController < ApplicationController
     @consumption = Consumption.new(consumption_params)
     @apartment = Apartment.find(params[:apartment_id])
     @consumption.apartment = @apartment
+
+
     # @apartment.user = current_user
 
-    respond_to do |format|
+    #respond_to do |format|
       if @consumption.save
-        format.html { redirect_to apartment_path(@apartment), notice: 'Consumption was successfully created.' }
-        format.json { render :show, status: :created, location: apartment_path(@apartment) }
-        # redirect_to apartment_path(@apartment)
+        # format.html { redirect_to apartment_path(@apartment), notice: 'Consumption was successfully created.' }
+        # format.json { render :show, status: :created, location: apartment_path(@apartment) }
+         redirect_to apartment_path(@apartment)
       else
         render :new
         # format.html { render :new }
         # format.json { render json: @consumption.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # PATCH/PUT /consumptions/1

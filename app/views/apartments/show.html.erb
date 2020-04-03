@@ -17,9 +17,12 @@
       <%#= link_to new_apartment_tenant_path(@apartment) do %>
        <!-- <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
       <%# end %> -->
-      <%= link_to edit_apartment_path(@apartment) do %>
-        <i class="far fa-edit text-decoration-none" data-toggle="tooltip" data-placement="top" title="edit apartment"></i>
-      <% end %>
+      <%#= link_to edit_apartment_path(@apartment) do %>
+<!--         <i class="far fa-edit text-decoration-none" data-toggle="tooltip" data-placement="top" title="edit apartment"></i>
+ -->      <%# end %>
+ <%= link_to new_apartment_tenant_path(@apartment) do %>
+   <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
+ <% end %>
       |<%= link_to apartments_path do %>
         <i class="fas fa-arrow-left text-primary text-decoration-none"data-toggle="tooltip" data-placement="top" title="back"></i>
       <% end %>
@@ -37,11 +40,13 @@
     </thead>
     <%# if @tenant %>
     <tbody>
+      <% @apartment.tenants.each do |tenant| %>
       <tr>
-        <td><%= @tenant.first_name %> <%= @tenant.last_name %></td>
+        <td><%= tenant.first_name %> <%= tenant.last_name %></td>
         <td><%= @tenant.phone %></td>
         <td><%= @tenant.email %></td>
       </tr>
+      <% end %>
     </tbody>
 
     </table>
@@ -62,7 +67,7 @@
       <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
     <% end %>
   </div>
-  <div class="row">
+  <div class="container row">
     <div class="table-responsive">
       <table class="table text-center table-sm table-hover">
         <thead class="table-primary">
@@ -83,7 +88,6 @@
             <td><%= consumption.end %></td>
             <td><%= consumption.lastreading %></td>
             <td><%= consumption.lastreading - consumption.inireading %> </td>
-            <!-- <td><%#= consumption.paid %></td> -->
             <%= simple_form_for [@apartment, @consumption] do |f| %>
             <td>
               <%= f.input :paid %></td>

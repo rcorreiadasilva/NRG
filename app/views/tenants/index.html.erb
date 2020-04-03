@@ -16,7 +16,7 @@
       <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
       <div class="card-product-infos">
         <h2 class="text-reset"><%= link_to tenant.first_name , tenant %></h2>
-         <p> Resident on <%= @tenant_apartment %> floor - door <%#= @tenant_apartment.door %>.</p>
+         <p> Resident on <%= @apartment %> floor - door <%#= @apartment.door %>.</p>
        <%= link_to 'Show', tenant %> |
        <%= link_to 'Edit',  edit_tenant_path(tenant) %>
       </div>
@@ -27,7 +27,7 @@
 
 <br>
 <%= link_to 'Home', root_path %>
-<%= link_to 'New tenant', new_tenant_path %>
+<%#= link_to 'New tenant', new_tenant_path %>
 
 
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_205122) do
+ActiveRecord::Schema.define(version: 2020_04_02_212135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_03_31_205122) do
     t.bigint "apartment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start"
-    t.date "end"
+    t.string "start"
+    t.string "end"
     t.index ["apartment_id"], name: "index_consumptions_on_apartment_id"
   end
 
@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 2020_03_31_205122) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.bigint "apartment_id"
     t.index ["apartment_id"], name: "index_tenants_on_apartment_id"
+    t.index ["user_id"], name: "index_tenants_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,4 +65,5 @@ ActiveRecord::Schema.define(version: 2020_03_31_205122) do
   add_foreign_key "apartments", "users"
   add_foreign_key "consumptions", "apartments"
   add_foreign_key "tenants", "apartments"
+  add_foreign_key "tenants", "users"
 end
