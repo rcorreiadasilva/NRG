@@ -1,5 +1,6 @@
 class Apartment < ApplicationRecord
-  belongs_to :user
+  # Creates the apartmnent.consumptions method
   has_many :consumptions, dependent: :destroy
-  has_many :tenants
+   # Creates the apartmnent.tenants method
+  has_many :tenants, dependent: :destroy
 end

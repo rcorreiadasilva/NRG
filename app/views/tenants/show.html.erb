@@ -12,8 +12,9 @@
 
 
 
-  <%#= link_to 'Edit', edit_tenant_path(@tenant) %> |
-  <%= link_to 'go_to_apartment', apartment_path(@apartment) %>
+  <%= link_to 'Edit', edit_tenant_path(@tenant) %> |
+  <%= link_to 'Back', tenants_path %> |
+  <%= link_to 'Delete', tenant_path(@tenant), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger btn-sm' %>
 
 
 

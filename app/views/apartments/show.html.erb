@@ -4,28 +4,19 @@
   </div>
 <!-- APARTMENT INFO -->
   <div class="row">
-    <h1 class="text-center "><%= @apartment.building.capitalize %> -  APARTMENT <%= @apartment.floor %> <%= @apartment.door.capitalize %> </h1>
+    <div class="col">
+      <h1 class="text-center "><%= @apartment.building.capitalize %> -  APARTMENT <%= @apartment.floor %> <%= @apartment.door.capitalize %> </h1>
+    </div>
+    <div class="col-1">
+      <%= link_to 'Back', apartments_path  %>
+    </div>
   </div>
 <!-- -------------------------------- -->
 
 <!-- TENANT INFO -->
-  <div class="row mb-3 mt-3">
+  <div class="row mt-3">
     <div class="col">
       <h2>TENANT</h2>
-    </div>
-    <div class="col-1">
-      <%#= link_to new_apartment_tenant_path(@apartment) do %>
-       <!-- <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
-      <%# end %> -->
-      <%#= link_to edit_apartment_path(@apartment) do %>
-<!--         <i class="far fa-edit text-decoration-none" data-toggle="tooltip" data-placement="top" title="edit apartment"></i>
- -->      <%# end %>
- <%= link_to new_apartment_tenant_path(@apartment) do %>
-   <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
- <% end %>
-      |<%= link_to apartments_path do %>
-        <i class="fas fa-arrow-left text-primary text-decoration-none"data-toggle="tooltip" data-placement="top" title="back"></i>
-      <% end %>
     </div>
   </div>
 
@@ -38,34 +29,39 @@
         <th scope="col">Email</th>
       </tr>
     </thead>
-    <%# if @tenant %>
+    <% if @apartment.tenants.exists? %>
     <tbody>
       <% @apartment.tenants.each do |tenant| %>
       <tr>
         <td><%= tenant.first_name %> <%= tenant.last_name %></td>
-        <td><%= @tenant.phone %></td>
-        <td><%= @tenant.email %></td>
+        <td><%= tenant.phone %></td>
+        <td><%= tenant.email %></td>
       </tr>
       <% end %>
     </tbody>
-
     </table>
-
-    <%# else %>
-  <%#= render 'add_tenant', tenant: @tenant %>
-    <%# end %>
+    <div class="col">
+      <%= link_to 'update apartment tenant', edit_apartment_path(@apartment) %>
+      <% else %>
+      <%= link_to 'Add new tenant', new_apartment_tenant_path(@apartment) %>
+      <% end %>
+    </div>
   </div>
 <!-- ------------------------------------------ -->
   <div class="row mb-3 mt-3">
-    <h2>ELECTRICITY</h2>
+    <div class="col">
+      <h2>ELECTRICITY</h2>
+    </div>
   </div>
   <div class="row mb-2">
-    <h3>Consumptions</h3>
+    <div class="col">
+      <h3>Consumptions</h3>
+    </div>
   </div>
   <div class="class mb-2">
-    <%= link_to new_apartment_consumption_path(@apartment) do %>
-      <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i>
-    <% end %>
+    <%= link_to 'Add new consumption',new_apartment_consumption_path(@apartment)  %>
+      <!-- <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i> -->
+
   </div>
   <div class="container row">
     <div class="table-responsive">
@@ -88,10 +84,10 @@
             <td><%= consumption.end %></td>
             <td><%= consumption.lastreading %></td>
             <td><%= consumption.lastreading - consumption.inireading %> </td>
-            <%= simple_form_for [@apartment, @consumption] do |f| %>
+            <%#= simple_form_for [@apartment, @consumption] do |f| %>
             <td>
-              <%= f.input :paid %></td>
-              <% end %>
+              <%#= f.input :paid %></td>
+              <%# end %>
           <% end %>
           </tr>
         </tbody>

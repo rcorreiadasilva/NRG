@@ -1,11 +1,12 @@
 <div class="form-inputs">
-    <%= simple_form_for (@tenant) do |f| %>
+    <%= simple_form_for (@apartment) do |f| %>
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :phone %>
-        <%= f.input :email %>
+        <%= f.input :tenant_first_name, placeholder: 'tenant first name' %>
+        <%= f.input :tenant_last_name, placeholder: 'tenant last name' %>
+        <%= f.input :tenant_phone, placeholder: 'contact' %>
+        <%= f.input :tenant_email, placeholder: 'email' %>
+
   </div>
   <div class="form-actions">
         <%= f.submit  class: "btn btn-primary"%>

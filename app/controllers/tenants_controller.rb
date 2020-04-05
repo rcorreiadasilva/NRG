@@ -1,29 +1,29 @@
 class TenantsController < ApplicationController
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy]
+  #before_action :set_tenant, only: [:show, :edit, :update, :destroy]
+  before_action :fetch_apartment, except: [:show, :index]
 
   # GET /tenants
   # GET /tenants.json
   def index
     @tenants = Tenant.all
-    #@apartment = Apartment.find(params[@apartment])
-    #@tenant.apartment = @apartment
-    #
-    #@apartment = current_apartment
-    #@apartments = Apartment.where(id: current_user.id)
+    #@tenant = Tenant.find(params[:id])
+    #@tenant = Tenant.find(params[:id])
+     #tr4 = Apartment.find(6).tenants.first.first_name
+     # => apartment(:id).tenants(@tenant)
+      #@tenant = Apartment.find(params[:id]).tenants(tenant_params)
+
   end
 
   # GET /tenants/1
   # GET /tenants/1.json
   def show
-     #@apartment = Apartment.find(params[:apartment_id])
-    @tenant.apartment = @apartment
+    @tenant = Tenant.find(params[:id])
+    # @tenant.apartment works!
   end
 
-  # GET /tenants/new
+  # GET   # /apartments/:apartment_id/tenants/new
   def new
-    @apartment = Apartment.find(params[:apartment_id])
     @tenant = Tenant.new
-
   end
 
   # GET /tenants/1/edit
@@ -34,55 +34,41 @@ class TenantsController < ApplicationController
   # POST /tenants.json
 
   def create
-    #@apartment = Apartment.find(params[:id])
     @tenant = Tenant.new(tenant_params)
-    # @tenant = tenant
+    # @tenant.apartment_id = params[:apartment_id]
+    # @tenant.apartment_id = @apartment.id
     @tenant.apartment = @apartment
-    @tenant.user = current_user
-
-    #@apartment = Apartment.find(params[:id])
-
+    @tenant.save
+    redirect_to apartment_path(@apartment)
 
 
-
-
-# @apartment = Apartment.find(params[:apartment_id])
-
-
-
-# @tenant.apartment.floor = @apartment.floor
-
-
-    #respond_to do |format|
-      if @tenant.save
-        # format.html { redirect_to @tenant, notice: 'tenant was successfully created.' }
-        # format.json { render :show, status: :created, location: @tenant }
-        redirect_to apartment_path(@apartment)
-      else
-        #render :new
-        # format.html { render :new }
-        # format.json { render json: @tenant.errors, status: :unprocessable_entity }
-        @tenant = Tenant.new
-      render "tenants/show"
-      end
-    end
+    # respond_to do |format|
+    #   if @tenant.save
+    #     format.html { redirect_to @tenant, notice: 'tenant was successfully created.' }
+    #     format.json { render :show, status: :created, location: @tenant }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @tenant.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
 
 
   # PATCH/PUT /tenants/1
   # PATCH/PUT /tenants/1.json
-  def update
-    @tenant.user = current_user
-    #respond_to do |format|
-      if @tenant.update(tenant_params)
-        redirect_to apartment_path(@apartment)
-        # format.html { redirect_to @tenant, notice: 'tenant was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @tenant }
-      else
-        render :edit
-        # format.html { render :edit }
-        # format.json { render json: @tenant.errors, status: :unprocessable_entity }
-      end
-    end
+  # def update
+  #   respond_to do |format|
+  #     if @tenant.update(tenant_params)
+
+  #       format.html { redirect_to @tenant, notice: 'tenant was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @tenant }
+  #     else
+
+  #       format.html { render :edit }
+  #       format.json { render json: @tenant.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+ # end
 
 
   # DELETE /tenants/1
@@ -99,17 +85,11 @@ class TenantsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tenant
       @tenant = Tenant.find(params[:id])
-      #@apartment = Apartment.find(params[:id])
-      #@apartment = @tenant.apartment_id
-      #@tenant.apartment_id = Apartment.all#@apartments.each do |apartment|
-        # apartment.floor + apartment.door
     end
 
-        #end
-
-      #@apartment = Apartment.find(params[:id])
-
-    #end
+    def fetch_apartment
+      @apartment = Apartment.find(params[:apartment_id])
+    end
 
     # Only allow a list of trusted parameters through.
     def tenant_params

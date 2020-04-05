@@ -5,13 +5,19 @@ class ApartmentsController < ApplicationController
   # GET /apartments.json
   def index
     @apartments = Apartment.all
+    @tenants = Tenant.all
+    #@apartment = Apartment.find(:id)
+    #@tenant = tenants(tenant_params)
+    #@tenant = Tenant.find(params[:id])
+    #@apartment.tenants = @tenant
   end
 
   # GET /apartments/1
   # GET /apartments/1.json
   def show
-
   end
+
+  #end
 
   # GET /apartments/new
   def new
@@ -22,11 +28,13 @@ class ApartmentsController < ApplicationController
   def edit
   end
 
+  #end
+
   # POST /apartments
   # POST /apartments.json
   def create
     @apartment = Apartment.new(apartment_params)
-    @apartment.user = current_user
+    #@apartment.user = current_user
 
     respond_to do |format|
       if @apartment.save
@@ -64,12 +72,15 @@ class ApartmentsController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
-      @consumption = Consumption.new
-      @tenant = Tenant.new
+      #@consumption = Consumption.new
+      # @tenant = Tenant.new
+      # @tenant = Tenant.all
 
 
     end
