@@ -1,11 +1,22 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
+
   # GET /apartments
   # GET /apartments.json
   def index
+    if user_signed_in?
+    @user = current_user.email
+  end
+
+    @apartments = policy_scope(Apartment).order(created_at: :desc)
     @apartments = Apartment.all
     @tenants = Tenant.all
+
+
+    #@tenant = @apartment.tenants.first
+
+
     #@apartment = Apartment.find(:id)
     #@tenant = tenants(tenant_params)
     #@tenant = Tenant.find(params[:id])
@@ -21,7 +32,14 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/new
   def new
+    if current_user.admin
     @apartment = Apartment.new
+    authorize @apartment
+    else
+      swal("Hello world!", {
+  button: false,
+});
+    end
   end
 
   # GET /apartments/1/edit
@@ -33,23 +51,34 @@ class ApartmentsController < ApplicationController
   # POST /apartments
   # POST /apartments.json
   def create
-    @apartment = Apartment.new(apartment_params)
-    #@apartment.user = current_user
+    # if current_user.admin
+      @apartment = Apartment.new(apartment_params)
+      authorize @apartment
+      #@apartment.user = current_user
 
-    respond_to do |format|
-      if @apartment.save
-        format.html { redirect_to @apartment, notice: 'Apartment was successfully created.' }
-        format.json { render :show, status: :created, location: @apartment }
-      else
-        format.html { render :new }
-        format.json { render json: @apartment.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @apartment.save
+          format.html { redirect_to @apartment, notice: 'Apartment was successfully created.' }
+          format.json { render :show, status: :created, location: @apartment }
+        else
+          format.html { render :new }
+          format.json { render json: @apartment.errors, status: :unprocessable_entity }
+        end
       end
-    end
+
+#     else
+#       swal("Hello world!", {
+#   button: false,
+# });
+#     end
+
+
   end
 
   # PATCH/PUT /apartments/1
   # PATCH/PUT /apartments/1.json
   def update
+
     @apartment.user = current_user
     respond_to do |format|
       if @apartment.update(apartment_params)
@@ -65,11 +94,13 @@ class ApartmentsController < ApplicationController
   # DELETE /apartments/1
   # DELETE /apartments/1.json
   def destroy
+
     @apartment.destroy
     respond_to do |format|
       format.html { redirect_to apartments_url, notice: 'Apartment was successfully destroyed.' }
       format.json { head :no_content }
     end
+
   end
 
 
@@ -78,6 +109,9 @@ class ApartmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
+      @tenant = Apartment.find(apartment.id).tenants
+      #@tenant = Tenant.find(params[:apartment_id])
+      authorize @apartment
       #@consumption = Consumption.new
       # @tenant = Tenant.new
       # @tenant = Tenant.all

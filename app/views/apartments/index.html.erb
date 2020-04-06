@@ -3,9 +3,16 @@
   <p id="notice"><%= notice %></p>
 
   <div class="row mb-5 ">
+    <div class="col-1">
+      <%= link_to 'Tenants', tenants_path %>
+    </div>
     <div class="col">
       <h1 class="text-center">Apartments</h1>
     </div>
+    <div class="col-1">
+      <%= link_to 'Back', root_path  %>
+
+  </div>
   </div>
 
 <table>
@@ -22,11 +29,9 @@
       <img src="https://images.unsplash.com/photo-1477907961416-f44287c1ef83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" />
       <div class="card-product-infos">
         <h2 class="text-reset"> <%= link_to "Apartment #{apartment.floor} #{apartment.door.capitalize}", apartment %></h2>
-        <p> <strong> <%= Apartment.find(apartment.id).tenants.first.first_name.upcase! %> <%=Apartment.find(apartment.id).tenants.first.last_name.upcase! %></strong>   </p>
+        <p> <strong> <%#= "#{Apartment.find(apartment.id).tenants.first.first_name.upcase! }"  %> <%#=Apartment.find(apartment.id).tenants.first.last_name.upcase! %></strong>   </p>
         <p>  <%=  apartment.building %>  </p>
-
       </div>
-
     </div>
     <% end %>
 
@@ -35,8 +40,11 @@
 
 <br>
 <%= link_to 'Home', root_path %>
-<%= link_to 'New Apartment', new_apartment_path %>
-
+<% if current_user.admin %>
+  <% if policy(Apartment).create? %>
+    <%= link_to "New apartment", new_apartment_path %>
+  <% end %>
+<% end %>
 </div>
 
 
