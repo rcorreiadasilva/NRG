@@ -2,10 +2,12 @@ class TenantsController < ApplicationController
   #before_action :set_tenant, only: [:show, :edit, :update, :destroy]
   before_action :fetch_apartment, except: [:show, :index]
 
+
   # GET /tenants
   # GET /tenants.json
   def index
     @tenants = Tenant.all
+    @tenants = policy_scope(Tenant).order(created_at: :desc)
     #@tenant = Tenant.find(params[:id])
     #@tenant = Tenant.find(params[:id])
      #tr4 = Apartment.find(6).tenants.first.first_name
@@ -17,13 +19,17 @@ class TenantsController < ApplicationController
   # GET /tenants/1
   # GET /tenants/1.json
   def show
+
     @tenant = Tenant.find(params[:id])
     # @tenant.apartment works!
+    authorize @tenant
   end
 
   # GET   # /apartments/:apartment_id/tenants/new
   def new
+
     @tenant = Tenant.new
+    authorize @tenant
   end
 
   # GET /tenants/1/edit
@@ -35,6 +41,7 @@ class TenantsController < ApplicationController
 
   def create
     @tenant = Tenant.new(tenant_params)
+    authorize @tenant
     # @tenant.apartment_id = params[:apartment_id]
     # @tenant.apartment_id = @apartment.id
     @tenant.apartment = @apartment
@@ -96,5 +103,6 @@ class TenantsController < ApplicationController
       params.fetch(:tenant, {})
       params.require(:tenant).permit(:first_name, :last_name, :phone, :email)
     end
+
 
   end

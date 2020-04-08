@@ -7,6 +7,7 @@ class ApartmentsController < ApplicationController
   def index
     if user_signed_in?
     @user = current_user.email
+
   end
 
     @apartments = policy_scope(Apartment).order(created_at: :desc)
@@ -109,7 +110,7 @@ class ApartmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
-      @tenant = Apartment.find(apartment.id).tenants
+      #@tenant = Apartment.find(apartment.id).tenants
       #@tenant = Tenant.find(params[:apartment_id])
       authorize @apartment
       #@consumption = Consumption.new

@@ -4,8 +4,12 @@
 
   <div class="row mb-5 ">
     <div class="col-1">
+      <%= link_to 'Home', root_path %>
+    </div>
+    <div class="col-1">
       <%= link_to 'Tenants', tenants_path %>
     </div>
+
     <div class="col">
       <h1 class="text-center">Apartments</h1>
     </div>
@@ -24,16 +28,47 @@
 
 
   <tbody>
+    <!-- IF USER ADMIN HE CAN SEE ALL APARTMENTS -->
+    <% if current_user.admin %>
+
     <% @apartments.each do |apartment| %>
     <div class="card-product mb-3">
       <img src="https://images.unsplash.com/photo-1477907961416-f44287c1ef83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" />
       <div class="card-product-infos">
         <h2 class="text-reset"> <%= link_to "Apartment #{apartment.floor} #{apartment.door.capitalize}", apartment %></h2>
-        <p> <strong> <%#= "#{Apartment.find(apartment.id).tenants.first.first_name.upcase! }"  %> <%#=Apartment.find(apartment.id).tenants.first.last_name.upcase! %></strong>   </p>
+        <p> <strong> <%= link_to "#{apartment.tenants.first.first_name.upcase! }"%> <%=apartment.tenants.first.last_name.upcase! %></strong>   </p>
+       <!--  NOTAS: NO p ACIMA, apartment é a mesma coisa que Apartment.find(apartment.id) -->
+       <!-- Apartment.find(apartment.id).tenants
+       11:42
+       nao precisas de fazer isto
+       11:42
+       podes fazer apartment.tenants
+       11:42
+       directamente
+     a variavel apartment já é uma instância do modelo Apartment
+   nao faz sentido estares a fazer um find-->
         <p>  <%=  apartment.building %>  </p>
       </div>
     </div>
     <% end %>
+
+    <% else %>
+
+<!-- IF USER NOT ADMIN ONLY SEES HIS APARTMENT -->
+
+    <% tenant =  Tenant.find_by(email: current_user.email) %>
+    <% apartment = Apartment.find_by(id: tenant.apartment_id) %>
+     <div class="card-product mb-3">
+      <img src="https://images.unsplash.com/photo-1477907961416-f44287c1ef83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" />
+      <div class="card-product-infos">
+        <h2 class="text-reset"> <%= link_to "Apartment #{apartment.floor} #{apartment.door.capitalize}", apartment %></h2>
+        <p> <strong> <%= "#{apartment.tenants.first.first_name.upcase! }"  %> <%=apartment.tenants.first.last_name.upcase! %></strong></p>
+        <p>  <%=  apartment.building %>  </p>
+      </div>
+    </div>
+<% end %>
+
+
 
   </tbody>
 </table>

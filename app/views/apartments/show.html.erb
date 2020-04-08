@@ -16,7 +16,7 @@
 <!-- TENANT INFO -->
   <div class="row mt-3">
     <div class="col">
-      <h2>TENANT</h2>
+      <h2 class="text-center">TENANT</h2>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
         <th scope="col">Email</th>
       </tr>
     </thead>
-    <% if @apartment.tenants.exists? %>
+
     <tbody>
       <% @apartment.tenants.each do |tenant| %>
       <tr>
@@ -41,16 +41,24 @@
     </tbody>
     </table>
     <div class="col">
-      <%= link_to 'update apartment tenant', edit_apartment_path(@apartment) %>
-      <% else %>
-      <%= link_to 'Add new tenant', new_apartment_tenant_path(@apartment) %>
+      <% if current_user.admin %>
+      <% if policy(Tenant).create? %>
+      <% if @apartment.tenants.exists? %>
+
+        <%= link_to 'update apartment tenant', edit_apartment_path(@apartment) %>
+        <% else %>
+        <%= link_to 'Add new tenant', new_apartment_tenant_path(@apartment) %>
+        <% end %>
+        <% end %>
       <% end %>
+
+
     </div>
   </div>
 <!-- ------------------------------------------ -->
   <div class="row mb-3 mt-3">
     <div class="col">
-      <h2>ELECTRICITY</h2>
+      <h2 class="text-center">ELECTRICITY</h2>
     </div>
   </div>
   <div class="row mb-2">
@@ -59,9 +67,10 @@
     </div>
   </div>
   <div class="class mb-2">
+    <% if current_user.admin %>
     <%= link_to 'Add new consumption',new_apartment_consumption_path(@apartment)  %>
       <!-- <i class="fas fa-plus-square text-primary" data-toggle="tooltip" data-placement="top" title="Add new consumption"></i> -->
-
+    <% end %>
   </div>
   <div class="container row">
     <div class="table-responsive">
@@ -76,9 +85,9 @@
            <th scope="col">Status</th>
          </tr>
         </thead>
-        <tbody>
+        <tbody class= "consumptions" >
           <% @apartment.consumptions.each do |consumption| %>
-           <tr>
+           <tr >
             <td><%= consumption.start %></td>
             <td><%= consumption.inireading %></td>
             <td><%= consumption.end %></td>
