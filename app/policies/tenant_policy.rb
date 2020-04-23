@@ -25,6 +25,6 @@ class TenantPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.user == user
+    user == user
   end
 end

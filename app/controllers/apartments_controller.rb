@@ -7,21 +7,12 @@ class ApartmentsController < ApplicationController
   def index
     if user_signed_in?
     @user = current_user.email
-
-  end
-
+    end
+    @tenant =  Tenant.find_by(email: current_user.email)
+    @apartment = apartment = Apartment.find_by(id: @tenant.apartment_id)
     @apartments = policy_scope(Apartment).order(created_at: :desc)
     @apartments = Apartment.all
     @tenants = Tenant.all
-
-
-    #@tenant = @apartment.tenants.first
-
-
-    #@apartment = Apartment.find(:id)
-    #@tenant = tenants(tenant_params)
-    #@tenant = Tenant.find(params[:id])
-    #@apartment.tenants = @tenant
   end
 
   # GET /apartments/1
@@ -110,12 +101,9 @@ class ApartmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
-      #@tenant = Apartment.find(apartment.id).tenants
-      #@tenant = Tenant.find(params[:apartment_id])
+
       authorize @apartment
-      #@consumption = Consumption.new
-      # @tenant = Tenant.new
-      # @tenant = Tenant.all
+
 
 
     end

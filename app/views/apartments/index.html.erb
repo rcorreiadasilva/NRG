@@ -52,20 +52,23 @@
     </div>
     <% end %>
 
-    <% else %>
-
 <!-- IF USER NOT ADMIN ONLY SEES HIS APARTMENT -->
+    <%  elsif current_user.email == @tenant.email %>
+          <% @apartment.tenants.each do |tenant| %>
 
-    <% tenant =  Tenant.find_by(email: current_user.email) %>
-    <% apartment = Apartment.find_by(id: tenant.apartment_id) %>
      <div class="card-product mb-3">
       <img src="https://images.unsplash.com/photo-1477907961416-f44287c1ef83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" />
       <div class="card-product-infos">
-        <h2 class="text-reset"> <%= link_to "Apartment #{apartment.floor} #{apartment.door.capitalize}", apartment %></h2>
-        <p> <strong> <%= "#{apartment.tenants.first.first_name.upcase! }"  %> <%=apartment.tenants.first.last_name.upcase! %></strong></p>
-        <p>  <%=  apartment.building %>  </p>
+        <h2 class="text-reset"> <%= link_to "Apartment #{@apartment.floor} #{@apartment.door.capitalize}", @apartment %></h2>
+        <p> <strong> <%= "#{tenant.first_name.upcase!  }"  %> <%= "#{tenant.last_name.upcase!}" %></strong></p>
+        <p>  <%=  @apartment.building %>  </p>
+        <p>  <%=  tenant.email %>  </p>
+
       </div>
     </div>
+     <% end %>
+    <% else %>
+    <% render 'pagenotfound' %>
 <% end %>
 
 

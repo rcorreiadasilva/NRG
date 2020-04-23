@@ -1,6 +1,6 @@
 class TenantsController < ApplicationController
   #before_action :set_tenant, only: [:show, :edit, :update, :destroy]
-  before_action :fetch_apartment, except: [:show, :index]
+  before_action :fetch_apartment, except: [:show, :index, :destroy]
 
 
   # GET /tenants
@@ -81,6 +81,8 @@ class TenantsController < ApplicationController
   # DELETE /tenants/1
   # DELETE /tenants/1.json
   def destroy
+#@tenant = Tenant.find(params[:apartment_id])
+@tenant = Tenant.find(params[:id])
     @tenant.destroy
     respond_to do |format|
       format.html { redirect_to tenants_url, notice: 'tenant was successfully destroyed.' }

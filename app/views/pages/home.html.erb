@@ -1,10 +1,11 @@
-<div class="container">
+ <% if user_signed_in? %>
+<div class="container background">
 
-  <div class="row mb-5 mt-3">
+  <div class="row ">
      <!--     HOME PAGE IF USER LOGGED IN -->
-    <% if user_signed_in? %>
 
-    <h1>Hello <%= @user %>    </h1>
+
+    <h1 class="mt-3 mb-5 ml-3">Hello <%= @user %>    </h1>
   </div>
 
   <div class="row">
@@ -35,6 +36,9 @@
         </div>
        </div>
      <% end %>
+     </div>
+
+     </div>
 
 <!--     HOME PAGE IF USER LOGGED OFF -->
     <% else %>
@@ -42,9 +46,6 @@
     <% end %>
 
 
-  </div>
-
-</div>
 
 
 
